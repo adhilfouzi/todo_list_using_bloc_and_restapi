@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_application_using_bloc_and_rest_api/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_application_using_bloc_and_rest_api/bloc/todo_bloc.dart';
+import 'package:todo_application_using_bloc_and_rest_api/data/data_provider/data_provider.dart';
+import 'package:todo_application_using_bloc_and_rest_api/data/repository/todo_repository.dart';
+import 'package:todo_application_using_bloc_and_rest_api/presentation/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return RepositoryProvider(
+      create: (context) => TodoRepository(),
+      child: BlocProvider(
+        create: (context) => TodoBloc(context.read<TodoDataProvider>()),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark(),
+          home: const HomeScreen(),
+        ),
       ),
-      home: const HomeScreen(),
     );
   }
 }
