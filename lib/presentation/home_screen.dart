@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         title: const Text(
           'Todo',
           style: TextStyle(
-            color: Colors.white,
+       
             fontWeight: FontWeight.w700,
             fontSize: 30,
           ),
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                 title: Text(
                   '${todo.title}',
                   style: TextStyle(
-                    color: todo.completed! ? Colors.grey[700] : Colors.white,
+                    color: todo.completed! ? Colors.grey[700] : const Color.fromARGB(255, 10, 10, 10),
                     decoration: todo.completed!
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
@@ -123,6 +123,8 @@ class HomeScreen extends StatelessWidget {
           todoController.postTodo(todo).then((value) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+               backgroundColor: Colors.green,
+             
                 duration: const Duration(milliseconds: 1000),
                 content: Text(value == 'true'
                     ? 'Todo added successfully'
