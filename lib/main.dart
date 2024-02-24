@@ -20,7 +20,10 @@ class MyApp extends StatelessWidget {
         create: (context) => TodoBloc(context.read<TodoDataProvider>()),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark(),
+          theme: ThemeData(
+            useMaterial3: true,
+            fontFamily: "Poppins"
+          ),
           home: const HomeScreen(),
         ),
       ),
